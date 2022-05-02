@@ -48,10 +48,10 @@ class Board extends React.Component {
       <button 
         onClick={
           () => {
-            this.state = {
+            this.setState({
             xIsNext: calculateWinner(this.state.squares) == 'O',
             squares: Array(9).fill(null),
-          };
+          });
         }
       }>
         {"Reset"}
