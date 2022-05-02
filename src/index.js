@@ -51,7 +51,7 @@ class Board extends React.Component {
           () => {
             this.state = {
             squares: Array(9).fill(null),
-            xIsNext: winner == 'O',
+            xIsNext: calculateWinner(this.state.squares) == 'O',
           };
         }
       }/>
