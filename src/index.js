@@ -45,7 +45,7 @@ class Board extends React.Component {
 
   renderReset() {
     return (
-      <Square 
+      <button 
         value={"Reset"}
         onClick={
           () => {
