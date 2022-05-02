@@ -48,6 +48,17 @@ class Board extends React.Component {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
+      <Square 
+        value={"Reset"}
+        onClick={
+          () => {
+            this.state = {
+            squares: Array(9).fill(null),
+            xIsNext: winner == 'O',
+          };
+        }
+      }
+      />
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O' );
     }
