@@ -43,11 +43,8 @@ class Board extends React.Component {
       />);
   }
 
-  render() {
-    const winner = calculateWinner(this.state.squares);
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
+  renderReset() {
+    return (
       <Square 
         value={"Reset"}
         onClick={
@@ -57,8 +54,17 @@ class Board extends React.Component {
             xIsNext: winner == 'O',
           };
         }
-      }
-      />
+      }/>
+    );
+  }
+
+  render() {
+    const winner = calculateWinner(this.state.squares);
+    let status, reset;
+
+    if (winner) {
+      status = 'Winner: ' + winner;
+      reset = this.renderReset();
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O' );
     }
@@ -66,6 +72,7 @@ class Board extends React.Component {
     return (
       <div>
         <div className="status">{status}</div>
+        <div className="reset">{reset}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
