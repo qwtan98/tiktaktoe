@@ -50,8 +50,8 @@ class Board extends React.Component {
         onClick={
           () => {
             this.state = {
-            squares: Array(9).fill(null),
             xIsNext: calculateWinner(this.state.squares) == 'O',
+            squares: Array(9).fill(null),
           };
         }
       }/>
