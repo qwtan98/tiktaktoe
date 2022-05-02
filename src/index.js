@@ -46,7 +46,6 @@ class Board extends React.Component {
   renderReset() {
     return (
       <button 
-        value={"Reset"}
         onClick={
           () => {
             this.state = {
@@ -54,7 +53,10 @@ class Board extends React.Component {
             squares: Array(9).fill(null),
           };
         }
-      }/>
+      }>
+        {"Reset"}
+      </button>
+
     );
   }
 
