@@ -25,28 +25,9 @@ class Board extends React.Component {
       />);
   }
 
-  renderReset() {
-    return (
-      <button 
-        onClick={
-          () => {
-            this.setState({
-            xIsNext: calculateWinner(this.state.squares) == 'O',
-            squares: Array(9).fill(null),
-          });
-        }
-      }>
-        {"Reset"}
-      </button>
-
-    );
-  }
-
   render() {
     return (
       <div>
-        <div className="status">{status}</div>
-        <div className="reset">{reset}</div>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -102,6 +83,26 @@ class Game extends React.Component {
     });
   }
 
+  renderReset() {
+    return (
+      <button 
+        onClick={
+          () => {
+            this.setState({
+            xIsNext: calculateWinner(this.state.squares) == 'O',
+            history: [{
+              squares: Array(9).fill(null),
+            }],
+            stepNumber: 0,
+          });
+        }
+      }>
+        {"Reset"}
+      </button>
+
+    );
+  }
+
   render() {
 
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
@@ -119,11 +120,19 @@ class Game extends React.Component {
       );
     });
 
-    let status;
+    let status, reset;
+
     if (winner) {
       status = 'Winner: ' + winner;
+      reset = this.renderReset();
     } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        if (current >= 9) {
+          status = 'No winners!';
+          reset = this.renderReset();
+        }
+        else {
+          status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+        }
     }
 
     return (
@@ -136,6 +145,7 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <div>{reset}</div>
           <ol>{moves}</ol>
         </div>
       </div>
